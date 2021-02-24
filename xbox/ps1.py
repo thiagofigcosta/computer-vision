@@ -74,7 +74,7 @@ def ex1(path='djonga.png'):
     bits=8
     hist_range=(0,2**bits)
     hist_img_size={'w':512,'h':512}
-    bin_width=int(round( hist_img_size['w']/hist_range[1] ))
+    bin_width=int(round(hist_img_size['w']/hist_range[1]))
     accumulate=False
     # calculates the histogram
     r_hist=cv2.calcHist(bgr_channels, [2], None, [hist_range[1]], hist_range, accumulate=accumulate)
@@ -88,15 +88,15 @@ def ex1(path='djonga.png'):
     cv2.normalize(b_hist, b_hist, alpha=0, beta=hist_img_size['h'], norm_type=cv2.NORM_MINMAX)
     thickness=2
     for i in range(1, hist_range[1]): # for each bin draws a line between the histogram points
-        cv2.line(hist_image, ( bin_width*(i-1), hist_img_size['h'] - int(round(r_hist[i-1][0])) ),
-                ( bin_width*(i), hist_img_size['h'] - int(round(r_hist[i][0])) ),
-                ( 0, 0, 255), thickness=thickness) # red
-        cv2.line(hist_image, ( bin_width*(i-1), hist_img_size['h'] - int(round(g_hist[i-1][0])) ),
-                ( bin_width*(i), hist_img_size['h'] - int(round(g_hist[i][0])) ),
-                ( 0, 255, 0), thickness=thickness) # green
-        cv2.line(hist_image, ( bin_width*(i-1), hist_img_size['h'] - int(round(b_hist[i-1][0])) ),
-                ( bin_width*(i), hist_img_size['h'] - int(round(b_hist[i][0])) ),
-                ( 255, 0, 0), thickness=thickness) # blue
+        cv2.line(hist_image,(bin_width*(i-1), hist_img_size['h']-int(round(r_hist[i-1][0]))),
+                (bin_width*(i), hist_img_size['h']-int(round(r_hist[i][0]))),
+                (0,0,255),thickness=thickness) # red
+        cv2.line(hist_image,(bin_width*(i-1), hist_img_size['h']-int(round(g_hist[i-1][0]))),
+                (bin_width*(i), hist_img_size['h']-int(round(g_hist[i][0]))),
+                (0,255,0),thickness=thickness) # green
+        cv2.line(hist_image,(bin_width*(i-1), hist_img_size['h']-int(round(b_hist[i-1][0]))),
+                (bin_width*(i), hist_img_size['h']-int(round(b_hist[i][0]))),
+                (255,0,0),thickness=thickness) # blue
     img_name='Djonga'
     cv2.imshow(img_name, img.copy())
     cv2.imshow('Histogram', hist_image)
@@ -265,8 +265,9 @@ def ex4(animation=True,square=True):
         if delta<=0:
             delta=1
         if not animation:
-            delta=None
-        cv2.waitKey(delta)
+            cv2.waitKey()
+        else:   
+            cv2.waitKey(delta)
 
 
 def main(argv):
